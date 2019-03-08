@@ -6,11 +6,15 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ${PWD}/code:/code
-      - ${PWD}/conf.d:/etc/nginx/conf.d
+      - ./src:/code
+      - ./conf.d:/etc/nginx/conf.d
     links:
       - php
   php:
     image: php:7-fpm
     volumes:
-      - ${PWD}/code:/code
+      - ./src:/code
+  memcached:
+    image: memcached:latest
+    ports:
+      - "11211:11211"
